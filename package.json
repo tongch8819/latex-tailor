@@ -24,6 +24,16 @@
             "command": "extension.convertLatexAlgoL2U",
             "title": "Convert LaTex: algorithm lowercase to uppercase",
             "description": "Convert LaTeX lowercase algorithm environments to uppercase from State to STATE"
+          },
+          {
+            "command": "extension.convertLatexFrac2Inline",
+            "title": "Convert LaTex: frac to inline division",
+            "description": "Convert LaTeX frac{a}{b} to inline division a / b"
+          },
+          {
+            "command": "extension.convertLatexInline2Frac",
+            "title": "Convert LaTex: inline division to frac",
+            "description": "Convert inline division a / b to LaTeX frac{a}{b}"
           }
           
       ]

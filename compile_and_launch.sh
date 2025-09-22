@@ -1,1 +1,2 @@
+conda deactivate
 vsce package

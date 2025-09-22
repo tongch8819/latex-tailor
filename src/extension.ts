@@ -20,6 +20,8 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('extension.convertLatexMultiline', convertLatexMultiline);
     registerCommand('extension.convertLatexAlgoU2L', convertLatexAlgoU2L);
     registerCommand('extension.convertLatexAlgoL2U', convertLatexAlgoL2U);
+    registerCommand('extension.convertLatexFrac2Inline', convertLatexFrac2Inline);
+    registerCommand('extension.convertLatexInline2Frac', convertLatexInline2Frac);
 }
 
 function convertLatexMultiline(content: string): string {
@@ -71,6 +73,16 @@ function convertLatexAlgoL2U(content: string): string {
         '\\\\Return': '\\textbf{return}'
     };
     return replaceContent(content, replacements);
+}
+
+function convertLatexFrac2Inline(content: string): string {
+    const regex = /\\frac\{([^}]*)\}\{([^}]*)\}/g;
+    return content.replace(regex, '$1 / $2');
+}
+
+function convertLatexInline2Frac(content: string): string {
+    const regex = /([^\s]+)\s*\/\s*([^\s]+)/g;
+    return content.replace(regex, '\\frac{$1}{$2}');
 }
 
 export function deactivate() {}
