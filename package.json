@@ -1,0 +1,43 @@
+{
+  "name": "latextailor",
+  "displayName": "LaTeX Tailor",
+  "description": "Convert LaTeX multline* environments to equation environments.",
+  "version": "0.0.1",
+  "engines": {
+      "vscode": "^1.60.0"
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+      "commands": [
+          {
+              "command": "extension.convertLatexMultiline",
+              "title": "Convert LaTex: multi(align) to equation",
+              "description": "Convert LaTeX multline and align environments to equation environments."
+          },
+          {
+            "command": "extension.convertLatexAlgoU2L",
+            "title": "Convert LaTex: algorithm uppercase to lowercase",
+            "description": "Convert LaTeX uppercase algorithm environments to lowercase from STATE to State"
+          },
+          {
+            "command": "extension.convertLatexAlgoL2U",
+            "title": "Convert LaTex: algorithm lowercase to uppercase",
+            "description": "Convert LaTeX lowercase algorithm environments to uppercase from State to STATE"
+          }
+          
+      ]
+  },
+  "scripts": {
+      "vscode:prepublish": "npm run compile",
+      "compile": "tsc -p ./",
+      "watch": "tsc -watch -p ./",
+      "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "license": "MIT",
+  "devDependencies": {
+      "typescript": "^4.4.3",
+      "vscode": "^1.1.37",
+      "@types/node": "^14.14.37"
+  }
+}
