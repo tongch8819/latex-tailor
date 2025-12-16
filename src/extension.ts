@@ -22,6 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand('extension.convertLatexAlgoL2U', convertLatexAlgoL2U);
     registerCommand('extension.convertLatexFrac2Inline', convertLatexFrac2Inline);
     registerCommand('extension.convertLatexInline2Frac', convertLatexInline2Frac);
+    registerCommand('extension.convertLatexMathDisplay2Inline', convertLatexMathDisplay2Inline);
 }
 
 function convertLatexMultiline(content: string): string {
@@ -47,6 +48,7 @@ function replaceContent(content: string, replacements: { [key: string]: string }
 }
 
 function convertLatexAlgoU2L(content: string): string {
+    // convert from uppercase to lowercase algorithm commands
     const replacements = {
         '\\\\STATE': '\\State',
         '\\\\WHILE': '\\While',
@@ -55,12 +57,17 @@ function convertLatexAlgoU2L(content: string): string {
         '\\\\ENDIF': '\\EndIf',
         '\\\\FOR': '\\For',
         '\\\\ENDFOR': '\\EndFor',
-        '\\\\textbf{return}': '\\Return'
+        '\\\\textbf{return}': '\\Return',
+        '\\RETURN': '\\Return',
+        '\\COMMENT': '\\Comment',
+        '\\REQUIRE': '\\Require',
+        '\\ENSURE': '\\Ensure',
     };
     return replaceContent(content, replacements);
 }
 
 function convertLatexAlgoL2U(content: string): string {
+    // conver from lowercase to uppercase algorithm commands
     const replacements = {
         '\\\\State': '\\STATE',
         '\\\\While': '\\WHILE',
@@ -83,6 +90,13 @@ function convertLatexFrac2Inline(content: string): string {
 function convertLatexInline2Frac(content: string): string {
     const regex = /([^\s]+)\s*\/\s*([^\s]+)/g;
     return content.replace(regex, '\\frac{$1}{$2}');
+}
+
+function convertLatexMathDisplay2Inline(content: string): string {
+    content = content.replace(/\\\[/g, '\\(');
+    content = content.replace(/\\\]/g, '\\)');
+    content = content.replace(/\$\$/g, '\$');
+    return content;
 }
 
 export function deactivate() {}

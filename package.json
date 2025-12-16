@@ -34,6 +34,11 @@
             "command": "extension.convertLatexInline2Frac",
             "title": "Convert LaTex: inline division to frac",
             "description": "Convert inline division a / b to LaTeX frac{a}{b}"
+          },
+          {
+            "command": "extension.convertLatexMathDisplay2Inline",
+            "title": "Convert LaTex: math display to inline",
+            "description": "Convert LaTeX math display environments to inline math environments"
           }
           
       ]
