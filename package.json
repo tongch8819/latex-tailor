@@ -1,7 +1,7 @@
 {
   "name": "latextailor",
   "displayName": "LaTeX Tailor",
-  "description": "Convert LaTeX multline* environments to equation environments.",
+  "description": "A versitile primitives to prune the latex source code.",
   "version": "0.0.1",
   "engines": {
       "vscode": "^1.60.0"
@@ -39,9 +39,35 @@
             "command": "extension.convertLatexMathDisplay2Inline",
             "title": "Convert LaTex: math display to inline",
             "description": "Convert LaTeX math display environments to inline math environments"
+          },
+          {
+            "command": "extension.removeEmph",
+            "title": "Convert LaTex: remove emph macro",
+            "description": "Removes the emph{} command while preserving the text inside it"
+          },
+          {
+            "command": "extension.removeThmEnvInfo",
+            "title": "Convert LaTex: remove theorem environment info",
+            "description": "Removes the optional title/info brackets from theorem, lemma, corollary, and definition environments"
           }
-          
-      ]
+      ],
+      "viewsContainers": {
+        "activitybar": [
+          {
+            "id": "latex-commands-container",
+            "title": "LaTeX Tailor",
+            "icon": "resources/write-svgrepo-com.svg"
+          }
+        ]
+      },
+      "views": {
+        "latex-commands-container": [
+          {
+            "id": "latex-commands-view",
+            "name": "Commands"
+          }
+        ]
+      }
   },
   "scripts": {
       "vscode:prepublish": "npm run compile",
