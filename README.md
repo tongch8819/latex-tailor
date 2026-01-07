@@ -2,6 +2,18 @@
 
 This extension converts LaTeX `multline*` environments to `equation` environments by removing `&` and `\\` symbols.
 
+## Environments and Build
+
+1. install nodejs and add its installation path into path.
+2. close all vscode instance and restart git bash.
+3. install npm package `vsce`
+```bash
+npm install
+npm install -g @vscode/vsce
+npm install -g typescript
+```
+4. build 
+
 ## Development Notes
 
 1. `src/extension.ts`: create functions and register it at function `activate`
