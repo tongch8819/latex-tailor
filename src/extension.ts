@@ -149,30 +149,36 @@ function convertLatexInline2Frac(content: string): string {
 }
 
 function convertLatexMathDisplay2Inline(content: string): string {
-    // Existing replacements
+    // Basic replacements
     content = content.replace(/\\\[/g, '\\(');
     content = content.replace(/\\\]/g, '\\)');
-    
-    // Note: Replacing $$ with $ globally can be risky if they aren't paired, 
-    // but keeping it as per your original logic:
     content = content.replace(/\$\$/g, '\$');
 
     /**
-     * New Feature: Convert \begin{equation} ... \end{equation}
-     * Regex Breakdown:
-     * \\begin\{equation\} : Match the opening tag
-     * (?:\\label\{([^}]*)\})? : Optional non-capturing group to find \label, capturing its content in $1
-     * ([\s\S]*?) : Captures the actual math content (including newlines) in $2
-     * \\end\{equation\} : Match the closing tag
+     * Regex breakdown:
+     * \\begin\{(equation\*?|align\*?)\} : Matches equation, equation*, align, or align*
+     * (?:\\label\{([^}]*)\})?        : Optional label group ($2)
+     * ([\s\S]*?)                     : The math content ($3)
+     * \\end\{\1\}                    : Matches the corresponding end tag
      */
-    const equationRegex = /\\begin\{equation\}(?:\\label\{([^}]*)\})?([\s\S]*?)\\end\{equation\}/g;
+    const complexEnvRegex = /\\begin\{(equation\*?|align\*?)\}(?:\\label\{([^}]*)\})?([\s\S]*?)\\end\{\1\}/g;
 
-    content = content.replace(equationRegex, (match, label, mathBody) => {
-        const trimmedMath = mathBody.trim();
-        if (label) {
-            return `$ ${trimmedMath} $ with label as \\textit{${label}}`;
+    content = content.replace(complexEnvRegex, (match, envName, label, mathBody) => {
+        // 1. Trim whitespace
+        let cleanedMath = mathBody.trim();
+
+        // 2. If it's an align environment, clean up alignment characters
+        if (envName.startsWith('align')) {
+            cleanedMath = cleanedMath
+                .replace(/&/g, ' ')      // Remove alignment ampersands
+                .replace(/\\\\/g, ' ');  // Replace line breaks with spaces for inline flow
         }
-        return `$ ${trimmedMath} $`;
+
+        // 3. Return formatted string
+        if (label) {
+            return `$ ${cleanedMath} $ with label as \\textit{${label}}`;
+        }
+        return `$ ${cleanedMath} $`;
     });
 
     return content;
