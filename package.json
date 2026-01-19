@@ -50,9 +50,29 @@
         "description": "Removes the emph{} command while preserving the text inside it"
       },
       {
+        "command": "extension.convertEmphToTextit",
+        "title": "Convert LaTex: emph to textit",
+        "description": "Changes \\emph{} macros to \\textit{}"
+      },
+      {
         "command": "extension.removeThmEnvInfo",
         "title": "Convert LaTex: remove theorem environment info",
         "description": "Removes the optional title/info brackets from theorem, lemma, corollary, and definition environments"
+      },
+      {
+        "command": "extension.splitMathByQuad",
+        "title": "Convert LaTex: split math by quad",
+        "description": "Splits inline math blocks at \\quad or \\qquad into separate inline blocks"
+      },
+      {
+        "command": "extension.removeParagraphKeyword",
+        "title": "Convert LaTex: remove paragraph macro",
+        "description": "Deletes the \\paragraph{} macro and its contents"
+      },
+      {
+        "command": "extension.recipeTotalClean",
+        "title": "Recipe: Total Clean",
+        "description": "Applies a series of cleaning operations to the LaTeX document"
       }
     ],
     "viewsContainers": {

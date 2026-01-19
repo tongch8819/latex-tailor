@@ -17,9 +17,12 @@ npm install -g typescript
 ## Development Notes
 
 1. `src/extension.ts`: create functions and register it at function `activate`
+    - `src/latexProvider.ts`: create a tree view icon
 2. `package.json`: update to add name and description of new sub-command
 3. `compile_and_launch.sh`: use `vsce` to package
+    - `vsce package`
 4. `**.vsix`: intall from vsix file
+5. reload the vscode window before usage
 
 ## Usage
 
